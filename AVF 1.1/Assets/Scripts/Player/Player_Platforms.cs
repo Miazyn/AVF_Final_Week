@@ -69,13 +69,11 @@ public class Player_Platforms : MonoBehaviour
             ManagerVariables.OnFloorTop = false;
             curPlatform = col.gameObject;
             ManagerVariables.platformY = curPlatform.transform.position.y;
-            Debug.LogError(curPlatform.transform.position.y);
         }
         if (col.gameObject.CompareTag("Ground_Top"))
         {
             ManagerVariables.OnPlatform = false;
             ManagerVariables.OnFloorTop = true;
-            Debug.LogError("floor Top");
         }
     }
 }
