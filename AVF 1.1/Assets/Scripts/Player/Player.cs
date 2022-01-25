@@ -81,9 +81,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (ManagerVariables.HasPlayerDied)
+        {
+            ManagerVariables.volleyballs = 0;
+        }
         #region[Multi_Shot_Enemy]
 
-        if(ManagerVariables.HasTriggerMs == true)
+        if (ManagerVariables.HasTriggerMs == true)
         {
             if (ManagerVariables.ms_shots_needed != 0)
             {
