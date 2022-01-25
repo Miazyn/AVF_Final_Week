@@ -25,9 +25,13 @@ public class Healthbar : MonoBehaviour
     public Material flashMaterial;
     public float time = 0.2f;
 
+    //Enemy
+    public GameObject ent;
 
     void Start()
     {
+        ent = GameObject.Find("Ent_Gegner");
+
         ManagerVariables.IsRespawning = false;
 
 
@@ -84,7 +88,7 @@ public class Healthbar : MonoBehaviour
         respawn.SetActive(true);
         you_died.SetActive(true);
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
             //For now reload world
             //SceneManager.LoadScene(scene.name);
@@ -184,7 +188,11 @@ public class Healthbar : MonoBehaviour
             HealthUpdate();
 
         }
-        
+        if(col2.gameObject  == ent)
+        {
+            TakeDamage(3);
+            HealthUpdate();
+        }
         HealthUpdate();
     }
 

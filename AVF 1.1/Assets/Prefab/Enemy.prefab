@@ -103,7 +103,7 @@ MonoBehaviour:
   health: 5
   shooting_speed: 1
   firePoint: {fileID: 60176859376817316}
-  bulletPrefab: {fileID: 4738055546515488366, guid: 92814d2ff5979f248bd5add314d4da41,
+  bulletPrefab: {fileID: 4738055546515488366, guid: ae01b28d39364ce4c83f4817c67fd270,
     type: 3}
   flash: {fileID: 2100000, guid: 88fe7d52f9afee24abd000f6e17ee64e, type: 2}
 --- !u!61 &1535814656035553675

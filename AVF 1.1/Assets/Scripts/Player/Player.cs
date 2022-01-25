@@ -354,7 +354,6 @@ public class Player : MonoBehaviour
             
            
             ImZiel = true;
-            Destroy(col2.gameObject);
             
         }
 

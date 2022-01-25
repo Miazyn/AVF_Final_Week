@@ -55,5 +55,9 @@ public class Managing_Collision_Respawn : MonoBehaviour
         {
             col.gameObject.SetActive(false);
         }
+        if (col.gameObject.CompareTag("Life"))
+        {
+            col.gameObject.SetActive(false);
+        }
     }
 }
