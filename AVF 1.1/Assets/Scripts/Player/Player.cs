@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask platformslayerMask;
     private Rigidbody2D rigidbody2d;
     private BoxCollider2D boxCollider2d;
-    public float jumpVelocity;
+    public float jumpForce;
     public float jumpReduction = 0.7f;
 
     public Transform firePoint;
@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        jumpVelocity = 300f;
+        jumpForce = 270f;
         sinceStart = Time.timeSinceLevelLoad;
         HasUnicorn = false;
         IsJumping = false;
@@ -270,14 +270,14 @@ public class Player : MonoBehaviour
     }
     void SmallerJump()
     {
-
-        rigidbody2d.AddForce((transform.up * jumpVelocity)* jumpReduction);
+        rigidbody2d.velocity = Vector3.right * 0.7f;
+        rigidbody2d.AddForce((transform.up * jumpForce)* jumpReduction);
      
 
     }
     void Jump()
     {
-        rigidbody2d.AddForce(transform.up * jumpVelocity);
+        rigidbody2d.AddForce(transform.up * jumpForce);
     }
 
     void Shoot()

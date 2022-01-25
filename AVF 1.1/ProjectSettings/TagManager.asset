@@ -22,6 +22,8 @@ TagManager:
   - FastVolleyBall
   - Platform
   - Normal_Enemy
+  - Side_Of_Platform
+  - Cam_Down
   layers:
   - Default
   - TransparentFX

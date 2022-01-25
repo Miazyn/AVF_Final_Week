@@ -2746,7 +2746,7 @@ PrefabInstance:
     - target: {fileID: 6474229711548063907, guid: baf5c14fc9cf5a342a5eb3212ac611f4,
         type: 3}
       propertyPath: m_Name
-      value: Enemy 1
+      value: Multi_Shot_Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 6474229711548063908, guid: baf5c14fc9cf5a342a5eb3212ac611f4,
         type: 3}

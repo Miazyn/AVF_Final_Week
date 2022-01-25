@@ -7,7 +7,7 @@ public class CameraMovement : MonoBehaviour
 
     public float speed = 20f;
     public GameObject player;
-    public GameObject yCoordinate;
+    public GameObject yCoordinate, yCoordinateBelow;
 
     public float xPos, yPos, zPos, xOffset,yOffset;
     public Vector3 playerMovement;
@@ -19,6 +19,7 @@ public class CameraMovement : MonoBehaviour
     {
         player = GameObject.Find("Player");
         yCoordinate = GameObject.Find("Y_Coordinate");
+        yCoordinateBelow = GameObject.Find("Y_Coordinate_Below");
 
         xOffset = 3.5f;
         yOffset = 2f;
@@ -32,24 +33,50 @@ public class CameraMovement : MonoBehaviour
     {
         //Reihenfolge -> Jump Nein? -> Jump Ja? -> HöherSprung Ja?  
         //EVTL WEITERFÜHRUNG -> Höheres Level Ja? Jump Höher Ja? Jump Höher Höher Ja?
-        //Positions
-        if (ManagerVariables.IsPlayerJumping == false || ManagerVariables.IsPlayerJumpingHigher == false)
+        if(yCoordinateBelow != null && (ManagerVariables.IsCamDown && !ManagerVariables.IsCamUp))
         {
-            xPos = player.transform.position.x + xOffset;
-            yPos = yCoordinate.transform.position.y + yOffset;
-        }
-        if (ManagerVariables.IsPlayerJumping)
-        {
+            if (ManagerVariables.IsPlayerJumping == false || ManagerVariables.IsPlayerJumpingHigher == false)
+            {
+                xPos = player.transform.position.x + xOffset;
+                yPos = yCoordinateBelow.transform.position.y + yOffset;
+            }
+            if (ManagerVariables.IsPlayerJumping)
+            {
 
-            xPos = player.transform.position.x + xOffset;
-            yPos = yCoordinate.transform.position.y + yOffsetJumping;
+                xPos = player.transform.position.x + xOffset;
+                yPos = yCoordinateBelow.transform.position.y + yOffsetJumping;
+            }
+            if (ManagerVariables.IsPlayerJumpingHigher)
+            {
+                xPos = player.transform.position.x + xOffset;
+                yPos = yCoordinateBelow.transform.position.y + yOffsetJumpingHigher;
+            }
         }
-        if (ManagerVariables.IsPlayerJumpingHigher)
+        else if(yCoordinate == null)
         {
-            xPos = player.transform.position.x + xOffset;
-            yPos = yCoordinate.transform.position.y + yOffsetJumpingHigher;
+            Debug.LogError("No y below defined");
         }
 
+        if (yCoordinate != null && (!ManagerVariables.IsCamDown && ManagerVariables.IsCamUp))
+        {
+            //Positions
+            if (ManagerVariables.IsPlayerJumping == false || ManagerVariables.IsPlayerJumpingHigher == false)
+            {
+                xPos = player.transform.position.x + xOffset;
+                yPos = yCoordinate.transform.position.y + yOffset;
+            }
+            if (ManagerVariables.IsPlayerJumping)
+            {
+
+                xPos = player.transform.position.x + xOffset;
+                yPos = yCoordinate.transform.position.y + yOffsetJumping;
+            }
+            if (ManagerVariables.IsPlayerJumpingHigher)
+            {
+                xPos = player.transform.position.x + xOffset;
+                yPos = yCoordinate.transform.position.y + yOffsetJumpingHigher;
+            }
+        }
         //Movement
         playerMovement = new Vector3(xPos, yPos, transform.position.z);
         transform.position = Vector3.Lerp(transform.position, playerMovement, Time.deltaTime * speed);

@@ -20,12 +20,17 @@ public class ManagerVariables : MonoBehaviour
     public static bool IsPlayerJumping, IsPlayerJumpingHigher, HasPlayerDied;
 
     public static bool HitTarget;
-    
+
+    //CAM
+    public static bool IsCamDown, IsCamUp;
     // Start is called before the first frame update
     void Start()
     {
         IsTutorialFinished = false;
         HasTriggerMs = false;
+
+        IsCamDown = false;
+        IsCamUp = true;
     }
 
     // Update is called once per frame
