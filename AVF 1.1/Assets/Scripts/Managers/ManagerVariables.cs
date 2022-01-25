@@ -22,7 +22,8 @@ public class ManagerVariables : MonoBehaviour
     public static bool HitTarget;
 
     //CAM
-    public static bool IsCamDown, IsCamUp;
+    public static bool IsCamDown, IsCamUp, OnPlatform, OnFloorTop;
+    public static float platformY;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +32,9 @@ public class ManagerVariables : MonoBehaviour
 
         IsCamDown = false;
         IsCamUp = true;
+
+        OnPlatform = false;
+        OnFloorTop = true;
     }
 
     // Update is called once per frame

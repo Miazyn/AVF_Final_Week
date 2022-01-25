@@ -6,6 +6,8 @@ public class Player_Platforms : MonoBehaviour
 {
     Rigidbody2D rb;
     GameObject camdown,camup,camMoveList;
+
+    GameObject curPlatform;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,7 +65,17 @@ public class Player_Platforms : MonoBehaviour
         }
         if (col.gameObject.CompareTag("Platform_Top"))
         {
-            Debug.LogError("Hit Top");
+            ManagerVariables.OnPlatform = true;
+            ManagerVariables.OnFloorTop = false;
+            curPlatform = col.gameObject;
+            ManagerVariables.platformY = curPlatform.transform.position.y;
+            Debug.LogError(curPlatform.transform.position.y);
+        }
+        if (col.gameObject.CompareTag("Ground_Top"))
+        {
+            ManagerVariables.OnPlatform = false;
+            ManagerVariables.OnFloorTop = true;
+            Debug.LogError("floor Top");
         }
     }
 }
