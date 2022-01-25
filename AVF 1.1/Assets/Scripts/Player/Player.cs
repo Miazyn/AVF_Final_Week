@@ -99,7 +99,7 @@ public class Player : MonoBehaviour
                 speed = savedSpeed * trigger_speed;
                 if (Input.GetButtonDown("Fire1"))
                 {
-                    InfiniteFire();
+                    Shoot();
                 }
             }
             else
@@ -287,10 +287,7 @@ public class Player : MonoBehaviour
         ManagerVariables.volleyballs -= 1;
 
     }
-    void InfiniteFire()
-    {
-        Instantiate(infiniteVolleyBallPrefab, firePoint.position, firePoint.rotation);
-    }
+
 
     #region[Tutorial]
     void Tutorial()

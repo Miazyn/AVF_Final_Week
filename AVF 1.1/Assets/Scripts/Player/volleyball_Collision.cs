@@ -56,6 +56,11 @@ public class volleyball_Collision : MonoBehaviour
         else if (col.CompareTag("Volleyball_Shoot"))
         {
         }
+        else if (col.gameObject.CompareTag("Enemy_Multi"))
+        {
+            ManagerVariables.ms_shots_needed -= volleyBallDamage;
+            Destroy(gameObject);
+        }
         else
         {
             Destroy(gameObject);

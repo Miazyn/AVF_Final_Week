@@ -148,13 +148,7 @@ public class Healthbar_Tutorial : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col2)
     {
-        if (col2.gameObject.CompareTag("Enemy_Multi"))
-        {
-            ManagerVariables.HasTriggerMs = false;
-            MultiShot_Enemy.HasSurvived = true;
-            Destroy(col2.gameObject.GetComponent<BoxCollider2D>());
-            TakeDamage(2);
-        }
+
 
         if (col2.gameObject.gameObject.CompareTag("Enemy") || col2.gameObject.gameObject.CompareTag("Normal_Enemy"))
         {

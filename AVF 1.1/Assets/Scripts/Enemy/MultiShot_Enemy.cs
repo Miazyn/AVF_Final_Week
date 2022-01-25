@@ -28,7 +28,7 @@ public class MultiShot_Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(ManagerVariables.ms_shots_needed == cur_health -1)
+        if(ManagerVariables.ms_shots_needed == cur_health -2)
         {
             enemy.material = flashMats;
             Invoke("Damage", 0.2f);

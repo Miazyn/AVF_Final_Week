@@ -1,8 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InfiniteBackground : MonoBehaviour
+public class InfinteBackGround_Below : MonoBehaviour
 {
     Vector3 originalPosition;
 
@@ -20,9 +20,9 @@ public class InfiniteBackground : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+
         cam = GameObject.Find("Main Camera");
-        originalPos = GameObject.Find("StartPos_BG");
+        originalPos = GameObject.Find("StartPos_BG_Below");
 
         originalPosition = new Vector3(originalPos.transform.position.x, originalPos.transform.position.y, originalPos.transform.position.z);
         //Only need sideways pos
@@ -48,7 +48,7 @@ public class InfiniteBackground : MonoBehaviour
             }
             //Opposite question for left movement
         }
-        if( ManagerVariables.IsDeathZone)
+        if (ManagerVariables.IsDeathZone)
         {
             startPos = originalStartPos;
             transform.position = originalPosition;
