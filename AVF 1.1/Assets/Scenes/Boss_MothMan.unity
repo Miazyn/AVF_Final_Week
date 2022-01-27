@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  camPos: {fileID: 0}
+  originalPos: {fileID: 0}
   parallaxEffect: 0.12
 --- !u!212 &1735575
 SpriteRenderer:
@@ -469,7 +469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  camPos: {fileID: 0}
+  originalPos: {fileID: 0}
   parallaxEffect: 0.12
 --- !u!1 &314607115
 GameObject:
@@ -618,8 +618,8 @@ Transform:
   - {fileID: 1706012092}
   - {fileID: 519420032}
   - {fileID: 1854848189}
-  - {fileID: 1438732533}
   - {fileID: 1819604256}
+  - {fileID: 1438732533}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -993,6 +993,7 @@ MonoBehaviour:
   speed: 20
   player: {fileID: 570125848}
   yCoordinate: {fileID: 914155912}
+  yCoordinateBelow: {fileID: 0}
   xPos: 0
   yPos: 0
   zPos: 0
@@ -1001,6 +1002,8 @@ MonoBehaviour:
   playerMovement: {x: 0, y: 0, z: 0}
   yOffsetJumping: 0
   yOffsetJumpingHigher: 0
+  yOffsetSaved: 0
+  platformOffset: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1182,21 +1185,19 @@ MonoBehaviour:
   respawnPoint: {fileID: 1706012092}
   endeDesLevels: {fileID: 615608282}
   startTime: 2
-  min_Pegasus: 5
   minTriggerCooldown: 1.5
-  sinceTrigger: 0
-  max_health: 3
   platformslayerMask:
     serializedVersion: 2
     m_Bits: 256
   jumpVelocity: 5
+  fallMultiplier: 2.5
   jumpReduction: 0.7
   firePoint: {fileID: 314607116}
   volleyBallPrefab: {fileID: 1967013506859580785, guid: 271c3ddf7f7ec17448000ecadfbe86a8,
     type: 3}
   infiniteVolleyBallPrefab: {fileID: 6643414445165642235, guid: 14f7c85415f8ad144bd5db9f26cef832,
     type: 3}
-  speed: 0.0035
+  speed: 3
   trigger_speed: 0.1
   animator: {fileID: 570125851}
   starting_volleyballs: 0
@@ -1261,6 +1262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   respawn: {fileID: 0}
   you_died: {fileID: 0}
+  rb: {fileID: 0}
   flashMaterial: {fileID: 2100000, guid: 88fe7d52f9afee24abd000f6e17ee64e, type: 2}
   time: 0.2
   ent: {fileID: 0}
@@ -1276,25 +1278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1673331cdefa70a4eab5f613d74d9a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emerald_filled_1: {fileID: 0}
-  emerald_filled_2: {fileID: 0}
-  emerald_filled_3: {fileID: 0}
-  emerald_empty_1: {fileID: 0}
-  emerald_empty_2: {fileID: 0}
-  emerald_empty_3: {fileID: 0}
-  collectEmerald1: {fileID: 0}
-  collectEmerald2: {fileID: 0}
-  collectEmerald3: {fileID: 0}
   ende_des_level: {fileID: 0}
   interaction: {fileID: 0}
-  portal_stone_1: {fileID: 0}
-  portal_stone_2: {fileID: 0}
-  portal_stone_3: {fileID: 0}
-  portal_stone_1_2: {fileID: 0}
-  portal_stone_1_3: {fileID: 0}
-  portal_stone_2_3: {fileID: 0}
-  portal_full: {fileID: 0}
-  portal_empty: {fileID: 0}
 --- !u!1 &590445210
 GameObject:
   m_ObjectHideFlags: 0
@@ -2255,7 +2240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  camPos: {fileID: 0}
+  originalPos: {fileID: 0}
   parallaxEffect: 0.01
 --- !u!212 &1163932416
 SpriteRenderer:
@@ -2488,7 +2473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  camPos: {fileID: 0}
+  originalPos: {fileID: 0}
   parallaxEffect: 0.02
 --- !u!1 &1230566297
 GameObject:
@@ -2893,7 +2878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  camPos: {fileID: 0}
+  originalPos: {fileID: 0}
   parallaxEffect: 0.02
 --- !u!212 &1308553649
 SpriteRenderer:
@@ -3285,7 +3270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  camPos: {fileID: 0}
+  originalPos: {fileID: 0}
   parallaxEffect: 0.01
 --- !u!212 &1507007225
 SpriteRenderer:
@@ -3694,7 +3679,7 @@ Transform:
   - {fileID: 1735573}
   - {fileID: 1507007223}
   m_Father: {fileID: 367304779}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1820902033
 GameObject:
@@ -3823,7 +3808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  camPos: {fileID: 0}
+  originalPos: {fileID: 0}
   parallaxEffect: 0.01
 --- !u!212 &1824522073
 SpriteRenderer:
@@ -3974,7 +3959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  camPos: {fileID: 0}
+  originalPos: {fileID: 0}
   parallaxEffect: 0.01
 --- !u!1 &1854848188
 GameObject:
@@ -4108,7 +4093,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  camPos: {fileID: 0}
+  originalPos: {fileID: 0}
   parallaxEffect: 0.01
 --- !u!1 &2063476343
 GameObject:
@@ -4264,7 +4249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  camPos: {fileID: 0}
+  originalPos: {fileID: 0}
   parallaxEffect: 0.01
 --- !u!212 &2067086819
 SpriteRenderer:

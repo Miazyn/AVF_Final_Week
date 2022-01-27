@@ -136,5 +136,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy_fire_speed: 2
   enemy_fire_damage: 1
-  min_flight: 2
+  min_flight: 5
   timeHeld: 0

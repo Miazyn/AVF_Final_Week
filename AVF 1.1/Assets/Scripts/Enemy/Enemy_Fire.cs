@@ -46,10 +46,12 @@ public class Enemy_Fire : MonoBehaviour
         else if (col2d.CompareTag("Player"))
         {
             ManagerVariables.playerDamage += 1;
+            Destroy(gameObject);
         }
-        else if (col2d.CompareTag("Enemy_Fire")) { 
+        else if (col2d.CompareTag("Enemy_Fire") || col2d.CompareTag("Volley_Enemy_Fire")) { 
         }
         else if (col2d.CompareTag("Life")) { }
+        else if (col2d.CompareTag("Enemy_Multi")) { }
         else
         {
             Destroy(gameObject);

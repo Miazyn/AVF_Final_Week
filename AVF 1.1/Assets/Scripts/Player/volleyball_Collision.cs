@@ -39,6 +39,13 @@ public class volleyball_Collision : MonoBehaviour
     {
 
         Enemy enemy = col.GetComponent<Enemy>();
+        FlyingEnemy flightenemy = col.GetComponent<FlyingEnemy>();
+        if(flightenemy != null)
+        {
+            flightenemy.TakeDamage(volleyBallDamage);
+            Destroy(gameObject);
+        }
+
         if (enemy != null)
         {
             enemy.TakeDamage(volleyBallDamage);
@@ -53,7 +60,7 @@ public class volleyball_Collision : MonoBehaviour
             Destroy(col.gameObject);
             //ManagerVariables.HitTarget = true;
         }
-        else if (col.CompareTag("Volleyball_Shoot"))
+        else if (col.CompareTag("Volleyball_Shoot") || col.CompareTag("Volley_Enemy_Fire"))
         {
         }
         else if (col.gameObject.CompareTag("Enemy_Multi"))

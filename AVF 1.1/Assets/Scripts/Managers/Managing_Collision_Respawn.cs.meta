@@ -4,10 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - hindernis: {fileID: 7117641927652470251, guid: 7c5eccd04c9f8034a90e475217337467,
-      type: 3}
-  - items: {fileID: 9056797420500642328, guid: 0680b7fb1d4a64c40ac608489dbcda8b, type: 3}
-  - gegner: {fileID: 378257369380166073, guid: 05f070e651cc0a941825c79877dbe5d4, type: 3}
+  - hindernis: {instanceID: 0}
+  - items: {instanceID: 0}
+  - gegner: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

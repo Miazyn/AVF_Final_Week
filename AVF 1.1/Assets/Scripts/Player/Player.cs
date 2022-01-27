@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+
     //respawn
     [SerializeField] private Transform player;
     [SerializeField] private Transform respawnPoint;
+    public Managing_Collision_Respawn respawnitems;
 
     public GameObject endeDesLevels;
 
@@ -15,21 +18,23 @@ public class Player : MonoBehaviour
     public float startTime = 2f;
     private float sinceStart = 0;
 
-    //Pegasus
-    public float min_Pegasus = 5f;
-    private float timePassed = 0;
+    //Pegasus not needed time frame
+    
 
     //Trigger Enemy cooldown
     public float minTriggerCooldown = 1.5f;
-    public float sinceTrigger = 0;
+    private float sinceTrigger = 0;
     private bool HasCooledDown = false;
 
-    public int max_health = 3;
+    private int max_health = 3;
 
     [SerializeField] private LayerMask platformslayerMask;
     private Rigidbody2D rigidbody2d;
     private BoxCollider2D boxCollider2d;
-    public float jumpForce;
+    [Range(1,10)]
+    public float jumpVelocity;
+
+    public float fallMultiplier = 2.5f;
     public float jumpReduction = 0.7f;
 
     public Transform firePoint;
@@ -50,7 +55,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        jumpForce = 270f;
+        respawnitems = gameObject.GetComponent<Managing_Collision_Respawn>();
         sinceStart = Time.timeSinceLevelLoad;
         HasUnicorn = false;
         IsJumping = false;
@@ -92,18 +97,20 @@ public class Player : MonoBehaviour
         {
             if (ManagerVariables.ms_shots_needed != 0)
             {
-                if (trigger_speed * savedSpeed < savedSpeed && (MultiShot_Enemy.HasDiedMs == false || MultiShot_Enemy.HasSurvived == false))
+                if (MultiShot_Enemy.HasDiedMs == false || MultiShot_Enemy.HasSurvived == false)
                 {
-                    trigger_speed += trigger_speed * 0.005f;
+                    animator.SetBool("IsRunning", false);
+                    speed = 0;
                 }
-                speed = savedSpeed * trigger_speed;
-                if (Input.GetButtonDown("Fire1"))
+               
+                if (Input.GetButtonDown("Fire1") && ManagerVariables.volleyballs > 0)
                 {
                     Shoot();
                 }
             }
             else
             {
+                animator.SetBool("IsRunning", true);
                 ManagerVariables.HasTriggerMs = false;
                 MultiShot_Enemy.HasDiedMs = true;
                 HasCooledDown = false;
@@ -129,7 +136,11 @@ public class Player : MonoBehaviour
         }
         if (ManagerVariables.IsRespawning == true)
         {
+            
             player.transform.position = respawnPoint.transform.position;
+
+
+            
 
             HasUnicorn = false;
             IsJumping = false;
@@ -137,6 +148,8 @@ public class Player : MonoBehaviour
             IsIdle = false;
             HasDied = false;
             ImZiel = false;
+
+            respawnitems.ItemRespawn();
             ManagerVariables.IsRespawning = false;
             ManagerVariables.IsDeathZone = false;
             startTime = (Time.timeSinceLevelLoad - sinceStart) + curStartTime;
@@ -151,7 +164,7 @@ public class Player : MonoBehaviour
             #region[IsPlayerAlive Is True]
             if (ManagerVariables.playerDamage != 3)
             {
-                transform.Translate(speed, 0, 0);
+                transform.Translate(Vector2.right * speed * Time.deltaTime);
                 if(ManagerVariables.InTutorial_Jump || ManagerVariables.InTutorial_DoubleJump || ManagerVariables.InTutorial_Collect  || ManagerVariables.InTutorial_Shoot || ManagerVariables.InTutorial_ShootAgain)
                 {
                     speed = savedSpeed * 0.5f;
@@ -163,13 +176,6 @@ public class Player : MonoBehaviour
                     speed = savedSpeed;
                 }
                 #endregion
-                //Pegasus
-                if (Time.timeSinceLevelLoad - timePassed > min_Pegasus)
-                {
-                    //Time has run out
-                    HasUnicorn = false;
-
-                }
 
                 if (isGrounded())
                 {
@@ -187,8 +193,15 @@ public class Player : MonoBehaviour
 
                 if (isGrounded() != true)
                 {
-                    IsJumping = true;
-                    IsRunning = false;
+                    if (!HasUnicorn)
+                    {
+                        IsJumping = true;
+                        IsRunning = false;
+                    }
+                    else
+                    {
+                        IsRunning = true;
+                    }
 
                     ManagerVariables.IsPlayerJumping = true;
                 }
@@ -208,17 +221,44 @@ public class Player : MonoBehaviour
 
 
                 }
-                if (smallJump == false && isGrounded() != true && Input.GetButtonDown("Jump"))
+                if (smallJump == false && isGrounded() != true && Input.GetButtonDown("Jump") && !ManagerVariables.HasTriggerMs)
                 {
                     //condi
-                    IsRunning = false;
-                    IsJumping = true;
+                    
+                    if (!HasUnicorn)
+                    {
+                        IsRunning = false;
+                        IsJumping = true;
+                    }
+                    else
+                    {
+                        IsRunning = true;
+                    }
+                    
                     //Jumped and now smaller Jump
                     SmallerJump();
                     smallJump = true;
 
                 }
-                
+                if (smallJump == false && isGrounded() != true && Input.GetButtonDown("Jump") && ManagerVariables.HasTriggerMs)
+                {
+                    //condi
+                    
+                    if (!HasUnicorn)
+                    {
+                        IsRunning = false;
+                        IsJumping = true;
+                    }
+                    else
+                    {
+                        IsRunning = true;
+                    }
+                    //Jumped and now smaller Jump
+                    MSSmallerJump();
+                    smallJump = true;
+
+                }
+
                 #endregion
                 if (ManagerVariables.volleyballs > 0 && ManagerVariables.HasTriggerMs == false && HasCooledDown)
                 {
@@ -260,6 +300,11 @@ public class Player : MonoBehaviour
         {
             IsIdle = true;
         }
+
+        if(rigidbody2d.velocity.y < 0)
+        {
+            rigidbody2d.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
         //animator:
         animator.SetBool("HasUnicorn", HasUnicorn);
         animator.SetBool("IsJumping", IsJumping);
@@ -268,16 +313,25 @@ public class Player : MonoBehaviour
         animator.SetBool("HasDied", HasDied);
 
     }
-    void SmallerJump()
+
+    void MSSmallerJump()
     {
         rigidbody2d.velocity = Vector3.right * 0.7f;
-        rigidbody2d.AddForce((transform.up * jumpForce)* jumpReduction);
-     
+    }
+
+    void SmallerJump()
+    {
+        rigidbody2d.velocity = (Vector2.up * jumpVelocity) * jumpReduction;
+
+        rigidbody2d.velocity += Vector2.right * 0.5f;
 
     }
     void Jump()
     {
-        rigidbody2d.AddForce(transform.up * jumpForce);
+
+        rigidbody2d.velocity = Vector2.up * jumpVelocity;
+
+        
     }
 
     void Shoot()
@@ -288,6 +342,10 @@ public class Player : MonoBehaviour
 
     }
 
+    void Add_Speed()
+    {
+        trigger_speed += trigger_speed * 0.005f;
+    }
 
     #region[Tutorial]
     void Tutorial()
@@ -348,7 +406,7 @@ public class Player : MonoBehaviour
         if (col2.gameObject.CompareTag("Pegasus"))
         {
             HasUnicorn = true;
-            timePassed = Time.timeSinceLevelLoad;
+            //DESTROY
             Destroy(col2.gameObject);
         }
         if (col2.gameObject.CompareTag("Ziel"))

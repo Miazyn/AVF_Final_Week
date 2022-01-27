@@ -5,8 +5,8 @@ using UnityEngine;
 public class Player_Platforms : MonoBehaviour
 {
     Rigidbody2D rb;
-    GameObject camdown,camup,camMoveList;
-
+    GameObject camdown,camup;
+    public GameObject camMoveList;
     GameObject curPlatform;
     // Start is called before the first frame update
     void Start()

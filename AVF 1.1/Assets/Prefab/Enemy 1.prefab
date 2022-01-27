@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1220530727611062471
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8618489005307948015}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Enemy_Fire
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8618489005307948015
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220530727611062471}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.026, y: -1.372, z: 4.9094534}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6474229711548063908}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6474229710655466340
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,6 +116,7 @@ Transform:
   m_Children:
   - {fileID: 6474229711828331149}
   - {fileID: 6474229710655466342}
+  - {fileID: 8618489005307948015}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -101,6 +132,8 @@ GameObject:
   - component: {fileID: 6474229711828331148}
   - component: {fileID: 6474229711828331150}
   - component: {fileID: 6474229711828331151}
+  - component: {fileID: 507086248127980198}
+  - component: {fileID: 5174275974320760905}
   m_Layer: 0
   m_Name: Gegner_Multi
   m_TagString: Enemy_Multi
@@ -212,4 +245,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0adf9d1f66e56eb4387600910aa38354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_health: 3
+  max_health: 20
+  flashMats: {fileID: 2100000, guid: 88fe7d52f9afee24abd000f6e17ee64e, type: 2}
+  animator: {fileID: 507086248127980198}
+  deathAnimation: 0.5
+  HasAnimationPlayed: 0
+--- !u!95 &507086248127980198
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6474229711828331147}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 91c3ca482b999f1478b25f558a9ed19e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5174275974320760905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6474229711828331147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e425d088c46c8944a0fe9ab93bea304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 4738055546515488366, guid: ae01b28d39364ce4c83f4817c67fd270, type: 3}
+  volleyball: {fileID: 1254440116580996015, guid: 5f9660400df663d498b942b8381800de,
+    type: 3}
+  firePoint: {fileID: 8618489005307948015}
+  bulletSpeed: 3

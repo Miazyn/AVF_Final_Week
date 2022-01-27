@@ -56,6 +56,15 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        for (int i = 0; i < transform.childCount;i++) {
+
+            if (gameObject.transform.GetChild(i).gameObject != null)
+            {
+                gameObject.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+
+        gameObject.SetActive(false);
+        
     }
 }

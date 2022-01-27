@@ -5,37 +5,45 @@ using UnityEngine;
 public class Managing_Collision_Respawn : MonoBehaviour
 {
     public GameObject hindernis;
-    public GameObject items , gegner;
+    public GameObject items , gegner, fliegendeGegner;
+
+    GameObject fliegendParent;
     // Start is called before the first frame update
     void Start()
     {
-        hindernis = GameObject.Find("Objects");
-        items = GameObject.Find("Items");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (ManagerVariables.IsRespawning)
-        {
+       
+    }
+
+    public void ItemRespawn()
+    {
+        
+            Debug.LogError("I am being called");
+
             if (hindernis != null)
             {
                 for (int a = 0; a < hindernis.transform.childCount; a++)
                 {
 
                     hindernis.transform.GetChild(a).gameObject.SetActive(true);
-
+                    Debug.LogError("Set Child active Hindernis");
                 }
             }
             else
             {
                 Debug.LogError("No Objects Over Class defined");
             }
+
             if (items != null)
             {
                 for (int b = 0; b < items.transform.childCount; b++)
                 {
                     items.transform.GetChild(b).gameObject.SetActive(true);
+                    Debug.LogError("Set Child active Items");
                 }
             }
             else
@@ -47,13 +55,15 @@ public class Managing_Collision_Respawn : MonoBehaviour
                 for (int b = 0; b < gegner.transform.childCount; b++)
                 {
                     gegner.transform.GetChild(b).gameObject.SetActive(true);
+                    Debug.LogError("Set Child active Gegner");
                 }
             }
             else
             {
                 Debug.LogError("No Gegner Over Class defined");
             }
-        }
+
+        
     }
 
     void OnCollisionEnter2D (Collision2D col)

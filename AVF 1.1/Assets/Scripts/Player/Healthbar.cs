@@ -17,7 +17,7 @@ public class Healthbar : MonoBehaviour
     public GameObject respawn;
     public GameObject you_died;
 
-
+    public Rigidbody2D rb;
     //FLash
     private SpriteRenderer player;
     private Material originalMaterial;
@@ -30,6 +30,8 @@ public class Healthbar : MonoBehaviour
 
     void Start()
     {
+        rb = gameObject.GetComponent<Rigidbody2D>();
+
         ent = GameObject.Find("Ent_Gegner");
 
         ManagerVariables.IsRespawning = false;
@@ -60,7 +62,6 @@ public class Healthbar : MonoBehaviour
 
     void HealthUpdate()
     {
-
         if (ManagerVariables.playerDamage == 1)
         {
             one_Bar.SetActive(false);
@@ -124,7 +125,6 @@ public class Healthbar : MonoBehaviour
             three_Bar.SetActive(true);
             ManagerVariables.playerDamage -= 1;
         }
-
     }
     #region[Damage Detected - EFFEKT]
     void TakeDamage(int dmg)
@@ -165,7 +165,17 @@ public class Healthbar : MonoBehaviour
             TakeDamage(3);
             HealthUpdate();
         }
-
+        if (col2.gameObject.gameObject.CompareTag("Enemy_Fire") && !ManagerVariables.HasTriggerMs)
+        {
+            rb.AddForce(Vector3.left * 150f);
+            TakeDamage(1);
+            HealthUpdate();
+        }
+        if(ManagerVariables.HasTriggerMs == true && col2.gameObject.gameObject.CompareTag("Enemy_Fire"))
+        {
+            TakeDamage(1);
+            HealthUpdate();
+        }
         if (col2.gameObject.CompareTag("Life"))
         {
 

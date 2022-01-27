@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MultiShot_Enemy : MonoBehaviour
 {
-    public int max_health = 3;
+    public int max_health = 20;
     private int cur_health;
     public static bool HasDiedMs, HasSurvived;
 
@@ -28,8 +29,13 @@ public class MultiShot_Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (ManagerVariables.IsRespawning)
+        {
+            ManagerVariables.ms_shots_needed = max_health;
+        }
         if(ManagerVariables.ms_shots_needed == cur_health -2)
         {
+            cur_health -= 2;
             enemy.material = flashMats;
             Invoke("Damage", 0.2f);
         }
@@ -53,6 +59,7 @@ public class MultiShot_Enemy : MonoBehaviour
     }
     void Die()
     {
+        SceneManager.LoadScene("Level_2", LoadSceneMode.Single);
         Destroy(gameObject.GetComponent<BoxCollider2D>());
         HasAnimationPlayed = Time.timeSinceLevelLoad;
         animator.SetBool("HasDied", true);

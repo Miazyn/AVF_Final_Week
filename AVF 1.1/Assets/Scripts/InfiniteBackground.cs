@@ -22,7 +22,6 @@ public class InfiniteBackground : MonoBehaviour
     {
        
         cam = GameObject.Find("Main Camera");
-        originalPos = GameObject.Find("StartPos_BG");
 
         originalPosition = new Vector3(originalPos.transform.position.x, originalPos.transform.position.y, originalPos.transform.position.z);
         //Only need sideways pos

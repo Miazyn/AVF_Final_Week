@@ -26,6 +26,8 @@ TagManager:
   - Cam_Down
   - Cam_Up
   - Platform_Top
+  - Ground_Top
+  - Volley_Enemy_Fire
   layers:
   - Default
   - TransparentFX

@@ -24,7 +24,7 @@ public class CameraMovement : MonoBehaviour
         yCoordinate = GameObject.Find("Y_Coordinate");
         yCoordinateBelow = GameObject.Find("Y_Coordinate_Below");
 
-        xOffset = 3.5f;
+        xOffset = 2.7f;
         yOffset = 2f;
 
         yOffsetSaved = yOffset;
@@ -57,6 +57,11 @@ public class CameraMovement : MonoBehaviour
         */
         //Reihenfolge -> Jump Nein? -> Jump Ja? -> HöherSprung Ja?  
         //EVTL WEITERFÜHRUNG -> Höheres Level Ja? Jump Höher Ja? Jump Höher Höher Ja?
+        if (ManagerVariables.IsRespawning)
+        {
+            ManagerVariables.IsCamUp = true;
+            ManagerVariables.IsCamDown = false;
+        }
         if (yCoordinateBelow != null && (ManagerVariables.IsCamDown && !ManagerVariables.IsCamUp))
         {
             

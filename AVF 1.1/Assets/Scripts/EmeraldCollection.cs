@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class EmeraldCollection : MonoBehaviour
 {
-    public GameObject emerald_filled_1, emerald_filled_2, emerald_filled_3;
-    public GameObject emerald_empty_1, emerald_empty_2, emerald_empty_3;
-    public GameObject collectEmerald1, collectEmerald2, collectEmerald3;
+     GameObject emerald_filled_1, emerald_filled_2, emerald_filled_3;
+     GameObject emerald_empty_1, emerald_empty_2, emerald_empty_3;
+     GameObject collectEmerald1, collectEmerald2, collectEmerald3;
 
     public GameObject ende_des_level;
 
@@ -16,9 +16,9 @@ public class EmeraldCollection : MonoBehaviour
     private bool emerald1, emerald2, emerald3;
 
     //Portal
-    public GameObject portal_stone_1, portal_stone_2, portal_stone_3;
-    public GameObject portal_stone_1_2, portal_stone_1_3, portal_stone_2_3;
-    public GameObject portal_full, portal_empty;
+     GameObject portal_stone_1, portal_stone_2, portal_stone_3;
+     GameObject portal_stone_1_2, portal_stone_1_3, portal_stone_2_3;
+     GameObject portal_full, portal_empty;
 
     // Start is called before the first frame update
     void Start()
@@ -89,19 +89,7 @@ public class EmeraldCollection : MonoBehaviour
 
     void CrystalFilling()
     {
-        if (ManagerVariables.HasPlayerDied)
-        {
-            collectEmerald1.SetActive(true);
-            collectEmerald2.SetActive(true);
-            collectEmerald3.SetActive(true);
-
-            emerald1 = false;
-            emerald2 = false;
-            emerald3 = false;
-
-            NullifyEmeralds();
-            portal_empty.SetActive(true);
-        }
+       
 
         emerald_filled_1.SetActive(emerald1);
         emerald_filled_2.SetActive(emerald2);

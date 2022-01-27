@@ -9,6 +9,8 @@ public class FlyingEnemy : MonoBehaviour
     public List<Transform> waypoints;
     public float moveSpeed;
     public int target;
+
+    private GameObject fullSprite;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +32,19 @@ public class FlyingEnemy : MonoBehaviour
     }
     void Die()
     {
-        Destroy(gameObject);
+        fullSprite = transform.parent.gameObject;
+
+        if(fullSprite != null)
+        {
+
+            for(int a=0; fullSprite.transform.childCount > a; a++)
+            {
+
+                fullSprite.transform.GetChild(a).gameObject.SetActive(false);
+
+            }
+
+        }
     }
     // Update is called once per frame
     void Update()
@@ -51,6 +65,15 @@ public class FlyingEnemy : MonoBehaviour
             {
                 target += 1;
             }
+        }
+
+    }
+
+    void OnTriggeEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Volleyball_Shoot"))
+        {
+            TakeDamage(2);
         }
     }
     
